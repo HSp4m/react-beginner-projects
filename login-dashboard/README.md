@@ -4,17 +4,21 @@
 
 ## Getting started:
 
-#### Clone the repository:
+#### Clone the repository
 ```Bash
-git clone https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories
+git clone https://github.com/HSp4m/react-beginner-projects
+```
+#### Navigate to the app directory
+```Bash
+cd login-dashboard
 ```
 
-#### Install dependencies:
+#### Install dependencies
 ```Bash
 npm install
 ```
 
-#### Run the development server:
+#### Run the development server
 ```Bash
 npm run dev
 ```
