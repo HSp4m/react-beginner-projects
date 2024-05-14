@@ -8,9 +8,25 @@
 ```Bash
 git clone https://github.com/HSp4m/react-beginner-projects
 ```
-#### Navigate to the app directory
+
+#### Navigate to the backend directory
 ```Bash
 cd login-dashboard
+cd backend
+```
+
+#### Start Prisma configuration on the backend
+> [Documentation](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/mongodb-typescript-mongodb)
+
+#### Run the backend
+```Bash
+npm run dev
+```
+
+#### Navigate to the frontend directory
+```Bash
+cd login-dashboard
+cd frontend
 ```
 
 #### Install dependencies
@@ -29,7 +45,7 @@ npm run dev
 ## Features
 - [x] Login, Register
 - [x] Theme toggle
-- [ ] Supabase integration
+- [x] MongoDB integration
 
 ## Preview
 ![Register](frontend/gitimages/register.png)
