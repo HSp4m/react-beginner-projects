@@ -1,4 +1,7 @@
 import { ModeToggle } from "./components/mode-toggle";
+import { Input } from "./components/ui/input";
+import { Button } from "./components/ui/button";
+import { Search } from "lucide-react";
 
 export function App() {
  
@@ -7,6 +10,14 @@ export function App() {
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold">Youtube downloader</h1>
         <ModeToggle />
+      </div>
+
+      <div className="flex w-full items-center space-x-2">
+        <Input placeholder="Paste Your URL..." type="text"/>
+        <Button>
+          <Search className="w-4 h-4 mr-2" />
+          Search
+        </Button>
       </div>
     </div>
   );
