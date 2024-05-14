@@ -1,6 +1,6 @@
 # Login Dashboard using ShadCn/UI
 
-![Login](gitimages/login.png)
+![Login](frontend/gitimages/login.png)
 
 ## Getting started:
 
@@ -32,4 +32,4 @@ npm run dev
 - [ ] Supabase integration
 
 ## Preview
-![Register](gitimages/register.png)
+![Register](frontend/gitimages/register.png)
