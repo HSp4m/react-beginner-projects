@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
 import { Button } from "./ui/button"
 import {
   Form,
@@ -17,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { Toaster } from "./ui/toaster"
+import { api } from "@/service/api";
 
 const registerSchema = z.object({
   email: z.string(),
@@ -36,12 +36,22 @@ export function CreateRegisterForm(props: any) {
     resolver: zodResolver(registerSchema)
   })
 
-  function onSubmit(data: RegisterSchema) {
+  async function onSubmit(data: RegisterSchema) {
+    if (!data.username || !data.password || !data.email) return;
+
+    const response = await api.post("/customer", {
+      name: data.username,
+      email: data.email,
+      password: data.password
+    })
+
     toast({
-      title: "Form submitted:",
+      title: "Response data:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          <code className="text-white">
+            {JSON.stringify(response.data, null, 2)}
+          </code>
         </pre>
       ),
     });

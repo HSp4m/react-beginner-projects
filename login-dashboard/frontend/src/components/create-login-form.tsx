@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
 import { Button } from "./ui/button"
 import {
   Form,
@@ -16,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { Toaster } from "./ui/toaster"
+import { api } from "@/service/api"
 
 const loginSchema = z.object({
   email: z.string(),
@@ -30,15 +30,71 @@ export function CreateLoginForm(props: any) {
     resolver: zodResolver(loginSchema)
   })
 
-  function onSubmit(data: LoginSchema) {
-    toast({
+  async function onSubmit(data: LoginSchema) {
+    if (!data.email) return;
+
+    const isUser = await api.post("/iscustomer", {
+      email: data.email
+    });
+
+    
+    if (!isUser.data)
+    {
+      toast({
+        title: "Invalid user data",
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
+              {JSON.stringify(isUser, null, 2)}
+            </code>
+          </pre>
+        ),
+      });
+    }
+
+    else {
+      const canLogin = await api.post("/canlogin", {
+        email: data.email,
+        password: data.password
+      })
+
+      if (!canLogin.data)
+      {
+        toast({
+          title: "Invalid user data",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">
+                {JSON.stringify(canLogin, null, 2)}
+              </code>
+            </pre>
+          ),
+        });
+      }
+
+      else {
+        toast({
+          title: "Logged in as " + JSON.stringify(canLogin.data.name, null, 2),
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">
+                {JSON.stringify(canLogin.data, null, 2)}
+              </code>
+            </pre>
+          ),
+        });
+      }
+
+    }
+
+    /*toast({
       title: "Form submitted:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    });
+    });*/
   }
 
   return (
